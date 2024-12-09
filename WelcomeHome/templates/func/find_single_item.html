@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block header %}
+  <h1>{% block title %}Find Single Item{% endblock %}</h1>
+{% endblock %}
+{% block content %}
+  <form method="post">
+    <label for="itemID">Enter Item ID:</label>
+    <input type="text" name="itemID" id="itemID" required>
+    <input type="submit" value="Find Locations">
+  </form>
+
+  {% if item_id %}
+    <h2>Locations for Item {{ item_id }}: </h2>
+    {% if locations %}
+      <ul>
+        {% for l in locations %}
+          <li>pieceNum:{{ l.pieceNum }}, Room: {{ l.roomNum }}, Shelf: {{ l.shelf }}, Shelf Number: {{ l.shelfNum }}, Shelf Description: {{ l.shelfDescription }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No pieces found for this Item ID.</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}
+

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Shopping {% endblock %}</h1>
+{% endblock %}
+{% block content %}
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#category').change(function() {
+                const category = $(this).val();
+                if (category) {
+                    window.location.href = "{{ url_for('func.add_items') }}?category=" + category;
+                }
+            });
+
+            $('#subcategory').change(function() {
+                const category = $('#category').val();
+                const subcategory = $(this).val();
+                if (category && subcategory) {
+                    window.location.href = "{{ url_for('func.add_items') }}?category=" + category + "&subcategory=" + subcategory;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Add Items to Order</h1>
+    <form method="POST">
+        <!-- Category Dropdown -->
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+            <option value="" disabled selected>Choose a category</option>
+            {% for category in categories %}
+                <option value="{{ category.mainCategory }}" {% if category.mainCategory == request.args.get('category') %}selected{% endif %}>
+                    {{ category.mainCategory }}
+                </option>
+            {% endfor %}
+        </select>
+        <!-- Sub-category Dropdown -->
+        <label for="subcategory">Subcategory:</label>
+        <select id="subcategory" name="subcategory">
+            <option value="" disabled selected>Choose a subcategory</option>
+            {% for subcategory in subcategories %}
+                <option value="{{ subcategory.subCategory }}" {% if subcategory.subCategory == request.args.get('subcategory') %}selected{% endif %}>
+                    {{ subcategory.subCategory }}
+                </option>
+            {% endfor %}
+        </select>
+        <!-- Items Dropdown -->
+        <label for="item">Item:</label>
+        <select id="item" name="itemID">
+            <option value="" disabled selected>Choose an item</option>
+            {% for item in items %}
+                <option value="{{ item.ItemID }}">{{ item.iDescription }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Add to Order</button>
+    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <a href="{{ url_for('func.shopping_bag') }}">View Shopping Bag</a>
+</body>
+{% endblock %}
+

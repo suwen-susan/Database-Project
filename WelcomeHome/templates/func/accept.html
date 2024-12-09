@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>Accept Donation</h1>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        <label for="donor_username">Donor Username:</label>
+        <input type="text" name="donor_username" id="donor_username" required><br><br>
+
+        <h3>Item Information:</h3>
+        <label for="iDescription">Description:</label>
+        <input type="text" name="iDescription" id="iDescription" required><br>
+
+        <label for="color">Color:</label>
+        <input type="text" name="color" id="color"><br>
+
+        <label for="isNew">Is New:</label>
+        <input type="checkbox" name="isNew" id="isNew"><br>
+
+        <label for="hasPieces">Has Pieces:</label>
+        <input type="checkbox" name="hasPieces" id="hasPieces"><br>
+
+        <label for="material">Material:</label>
+        <input type="text" name="material" id="material"><br>
+
+        <label for="mainCategory">Main Category:</label>
+        <input type="text" name="mainCategory" id="mainCategory" required><br>
+
+        <label for="subCategory">Sub Category:</label>
+        <input type="text" name="subCategory" id="subCategory" required><br>
+
+        <!-- Pieces Information -->
+        <div id="pieces">
+            <h3>Piece Information:</h3>
+            <div class="piece">
+                <label for="piece_num">Piece Number:</label>
+                <input type="number" name="piece_num"><br>
+
+                <label for="pDescription">Description:</label>
+                <input type="text" name="pDescription"><br>
+
+                <label for="length">Length:</label>
+                <input type="number" name="length"><br>
+
+                <label for="width">Width:</label>
+                <input type="number" name="width"><br>
+
+                <label for="height">Height:</label>
+                <input type="number" name="height"><br>
+
+                <label for="roomNum">Room Number:</label>
+                <input type="number" name="roomNum"><br>
+
+                <label for="shelfNum">Shelf Number:</label>
+                <input type="number" name="shelfNum"><br>
+
+                <label for="pNotes">Notes:</label>
+                <textarea name="pNotes"></textarea><br><br>
+            </div>
+        </div>
+        <!-- Add button to add more pieces -->
+        <button type="button" onclick="addPiece()">Add Piece</button><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function addPiece() {
+            var piecesDiv = document.getElementById('pieces');
+            var newPiece = document.createElement('div');
+            newPiece.classList.add('piece');
+            newPiece.innerHTML = `
+                <label for="piece_num">Piece Number:</label>
+                <input type="number" name="piece_num"><br>
+
+                <label for="pDescription">Description:</label>
+                <input type="text" name="pDescription"><br>
+
+                <label for="length">Length:</label>
+                <input type="number" name="length"><br>
+
+                <label for="width">Width:</label>
+                <input type="number" name="width"><br>
+
+                <label for="height">Height:</label>
+                <input type="number" name="height"><br>
+
+                <label for="roomNum">Room Number:</label>
+                <input type="number" name="roomNum"><br>
+
+                <label for="shelfNum">Shelf Number:</label>
+                <input type="number" name="shelfNum"><br>
+
+                <label for="pNotes">Notes:</label>
+                <textarea name="pNotes"></textarea><br><br>
+            `;
+            piecesDiv.appendChild(newPiece);
+        }
+    </script>
+{% endblock %}

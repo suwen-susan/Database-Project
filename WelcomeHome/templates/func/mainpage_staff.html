@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block header %}
+  <h1>{% block title %}Home{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <p>Welcome, {{ current_user.username }}!</p>
+
+  {% if current_user.is_authenticated %}
+    <a href="{{ url_for('func.find_single_item') }}" class="btn">Find Single Item</a>
+    <a href="{{ url_for('func.find_order_items') }}" class="btn">Find Order Items</a>
+    <a href="{{ url_for('func.accept_donation') }}" class="btn">Add Donation</a>
+    <a href="{{ url_for('func.prepare_order') }}" class="btn">Prepare Order</a>
+    <a href="{{ url_for('func.update_status') }}" class="btn">Update Status</a>
+    <a href="{{ url_for('func.staff_orders') }}" class="btn">My Orders</a>
+    <a href="{{ url_for('func.view_rankings') }}" class="btn">Staff Rankings</a>
+    <a href="{{ url_for('func.add_items') }}" class="btn">Shopping</a>
+    <a href="{{ url_for('func.start_order') }}" class="btn">Confirm Orders</a>
+
+  {% else %}
+    <p>Please <a href="{{ url_for('auth.login') }}">log in</a> </p>
+  {% endif %}
+
+{% endblock %}

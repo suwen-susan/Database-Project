@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Find Order Items{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    <label for="orderID">Enter Order ID:</label>
+    <input type="text" id="orderID" name="orderID" required>
+    <button type="submit">Find Items</button>
+</form>
+
+    {% if items %}
+        <ul>
+            {% for item_id, item_data in items.items() %}
+                <li>
+                    <h2>Item {{ item_id }}: {{ item_data[0].ItemDescription }}</h2>
+                    <p>Main Category: {{ item_data[0].mainCategory }}</p>
+                    <p>Sub Category: {{ item_data[0].subCategory }}</p>
+
+                    <h3>Pieces:</h3>
+                    <ul>
+                        {% for piece in item_data[1:] %}
+                            <li>
+                                <p>Piece Number: {{ piece.pieceNum }}</p>
+                                <p>Description: {{ piece.PieceDescription }}</p>
+                                <p>Room: {{ piece.roomNum }}</p>
+                                <p>Shelf: {{ piece.shelfNum }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
+
+
+

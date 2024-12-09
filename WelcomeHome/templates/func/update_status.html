@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Update Order Status{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    <label for="orderID">Enter Order ID:</label>
+    <input type="text" id="orderID" name="orderID" required>
+
+
+    <label for="status">Choose a new status:</label>
+    <select name="status" id="status">
+      <option value="" disabled selected>Select an option</option>
+      <option value="pending">Pending</option>
+      <option value="placed">Placed</option>
+      <option value="preparing">Preparing</option>
+      <option value="ready for delivery">Ready for Delivery</option>
+      <option value="shipped">Shipped</option>
+      <option value="complete">Complete</option>
+      <option value="returned">Returned</option>
+    </select>
+    <button type="submit">Update Status</button>
+  </form> 
+
+{% endblock %}
+
+
+

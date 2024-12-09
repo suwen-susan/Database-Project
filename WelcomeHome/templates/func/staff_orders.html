@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}My Orders{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <h2>Orders as a Client</h2>
+    {% if client_orders %}
+    <table>
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>OrderDate</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in client_orders %}
+            <tr>
+            <td>{{ order.orderID }}</td>
+            <td>{{ order.orderDate }}</td>
+            <td>{{ order.status }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No client orders found.</p>
+    {% endif %}
+
+    <!-- Supervisor Orders -->
+    <h2>Orders as a Supervisor</h2>
+    {% if supervisor_orders %}
+    <table>
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>OrderDate</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in supervisor_orders %}
+            <tr>
+            <td>{{ order.orderID }}</td>
+            <td>{{ order.orderDate }}</td>
+            <td>{{ order.status }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No supervisor orders found.</p>
+    {% endif %}
+
+    <!-- Volunteer Orders -->
+    <h2>Orders as a Volunteer</h2>
+    {% if volunteer_orders %}
+    <table>
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>OrderDate</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in volunteer_orders %}
+            <tr>
+            <td>{{ order.orderID }}</td>
+            <td>{{ order.orderDate }}</td>
+            <td>{{ order.status }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No volunteer orders found.</p>
+    {% endif %}
+{% endblock %}

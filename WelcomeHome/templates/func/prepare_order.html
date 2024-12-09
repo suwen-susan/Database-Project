@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>Prepare Order</h1>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        <label for="search_type">search_type:</label>
+        <select name="search_type" id="search_type" required>
+            <option value="order_id">OrderID</option>
+            <option value="client_username">Username</option>
+        </select>
+        <input type="text" name="search_query" id="search_query" required>
+        <input type="submit" value="search">
+    </form>
+
+    <h2>Results:</h2>
+    <ul>
+        {% for order in orders %}
+            <li>
+                OrderID: {{ order[0] }}, OrderStatus: {{ order[3] }}, Client: {{ order[4] }}, Date: {{ order[1] }}
+                <form method="post" action="{{ url_for('func.update_order_location') }}">
+                    <input type="hidden" name="order_id" value="{{ order[0] }}">
+                    <input type="submit" value=" ready for delivery">
+                </form>
+            </li>
+        {% else %}
+            <li>Nothing found. Please try other options!</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
